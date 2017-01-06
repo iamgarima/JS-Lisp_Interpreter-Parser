@@ -15,6 +15,9 @@ function parse (input, arr) {
   }
   var result
   result = factory_parser(input).pop()
+  if (result[1] === '') {
+    return arr.concat(result[0])
+  }
   return parse(result[1], arr.concat(result[0]))
 }
 
@@ -32,6 +35,9 @@ function elem(p) {
     str = str + sl
     sl = p.slice(1)[0]
     p = p.slice(1)
+    if (sl === undefined) {
+      break;
+    }
   }
   return [str, p]
 }
@@ -56,5 +62,5 @@ function space_parser (input) {
 }
 
  console.log(parse('(+ (+ 3 4 (<= 7 8) 9 6) 2)', []))
-// console.log(parse('7', []))
-// console.log(parse('(define A 5)', []))
+ console.log(parse('A', []))
+ console.log(parse('(define A 5)', []))
